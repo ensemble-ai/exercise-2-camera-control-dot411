@@ -11,6 +11,8 @@ const WIDTH:float = RADIUS * 2.0
 const BASE_SPEED = 50
 const HYPER_SPEED = 300
 
+signal moving
+
 func _physics_process(_delta):
 	
 	var speed = BASE_SPEED
@@ -45,6 +47,7 @@ func _physics_process(_delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+	emit_signal("moving", _delta, direction)
 
 func _play(player:AudioStreamPlayer2D) -> void:
 	if !player.playing:
